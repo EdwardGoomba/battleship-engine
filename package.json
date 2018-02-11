@@ -1,0 +1,28 @@
+{
+  "name": "battleship-engine",
+  "version": "1.0.0",
+  "description": "JS based battleship engine w/testing via Mocha/Chai",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EdwardGoomba/battleship-engine.git"
+  },
+  "keywords": [
+    "battleship",
+    "mocha",
+    "chai"
+  ],
+  "author": "Edward Danilyuk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/EdwardGoomba/battleship-engine/issues"
+  },
+  "homepage": "https://github.com/EdwardGoomba/battleship-engine#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.0.0"
+  }
+}
