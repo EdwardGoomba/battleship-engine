@@ -14,13 +14,15 @@ function validateLocation (player, coordinates) {
 }
 
 function validateLocations (player, locations) {
-  let validated = locations.map(function (location) {
+  let validated = locations.map(function(location) {
     return validateLocation(player, location);
   });
   return validated.indexOf(false) === -1;
 }
 
 function placeShip (player, ship, startingCoordinates, direction) {
+  if (!direction) throw Error('You left out the direction! I need that for math!');
+
   let proposedLocations = [];
   let previousLocation,
     rowNumber,
