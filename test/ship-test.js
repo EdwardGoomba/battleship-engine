@@ -2,46 +2,10 @@ const expect = require('chai').expect;
 
 describe('checkForShip', function() {
   const checkForShip = require('../game-logic/ship-methods').checkForShip;
+  let player;
 
-  it('should correctly report no ship at a given players coordinate', function() {
-    player = {
-      ships: [
-        {
-          locations: [[0,0]]
-        }
-      ]
-    };
-
-    expect(checkForShip(player, [9,9])).to.be.false;
-  });
-
-  it('should correctly report a ship at the given coordinates', function() {
-    player = {
-      ships: [
-        {
-          locations: [[0,0]]
-        }
-      ]
-    };
-
-    expect(checkForShip(player, [0,0])).to.deep.equal(player.ships[0]);
-  });
-
-  it('should handle ships at more than one coordinate', function() {
-    player = {
-      ships: [
-        {
-          locations: [[0,0], [0,1]]
-        }
-      ]
-    };
-
-    expect(checkForShip(player, [0,0])).to.deep.equal(player.ships[0]);
-    expect(checkForShip(player, [0,1])).to.deep.equal(player.ships[0]);
-    expect(checkForShip(player, [9,9])).to.be.false;
-  });
-
-  it('should handle checking multipe ships', function() {
+  // setup player object
+  before(function() {
     player = {
       ships: [
         {
@@ -55,7 +19,23 @@ describe('checkForShip', function() {
         }
       ]
     };
+  });
 
+  it('should correctly report no ship at a given players coordinate', function() {
+    expect(checkForShip(player, [9,9])).to.be.false;
+  });
+
+  it('should correctly report a ship at the given coordinates', function() {
+    expect(checkForShip(player, [0,0])).to.deep.equal(player.ships[0]);
+  });
+
+  it('should handle ships at more than one coordinate', function() {
+    expect(checkForShip(player, [0,0])).to.deep.equal(player.ships[0]);
+    expect(checkForShip(player, [0,1])).to.deep.equal(player.ships[0]);
+    expect(checkForShip(player, [9,9])).to.be.false;
+  });
+
+  it('should handle checking multipe ships', function() {
     expect(checkForShip(player, [0,0])).to.deep.equal(player.ships[0]);
     expect(checkForShip(player, [0,1])).to.deep.equal(player.ships[0]);
     expect(checkForShip(player, [1,0])).to.deep.equal(player.ships[1]);
@@ -83,9 +63,10 @@ describe('damageShip', function() {
 
 describe('fire', function() {
   const fire = require('../game-logic/ship-methods').fire;
+  let player;
 
-  it('should record damage on the given players ship at a given coordinate', function() {
-    var player = {
+  beforeEach(function() {
+    player = {
       ships: [
         {
           locations: [[0,0]],
@@ -93,24 +74,15 @@ describe('fire', function() {
         }
       ]
     };
+  });
 
+  it('should record damage on the given players ship at a given coordinate', function() {
     fire(player, [0,0]);
-
     expect(player.ships[0].damage[0]).to.deep.equal([0,0]);
   });
 
   it('should NOT record damage if there is no ship at my coordinates', function() {
-    var player = {
-      ships: [
-        {
-          locations: [[0,0]],
-          damage: []
-        }
-      ]
-    };
-
     fire(player, [9,9]);
-
     expect(player.ships[0].damage).to.empty;
   });
 
