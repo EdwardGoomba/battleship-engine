@@ -65,6 +65,7 @@ describe('fire', function() {
   const fire = require('../game-logic/ship-methods').fire;
   let player;
 
+  // setup player for each test
   beforeEach(function() {
     player = {
       ships: [
@@ -74,6 +75,14 @@ describe('fire', function() {
         }
       ]
     };
+  });
+
+  after(function() {
+    console.log('Entire test suite completed');
+  });
+
+  afterEach(function() {
+    console.log('One unit test completed');
   });
 
   it('should record damage on the given players ship at a given coordinate', function() {
